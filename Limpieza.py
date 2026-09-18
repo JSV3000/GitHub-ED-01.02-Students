@@ -36,3 +36,26 @@ df["rendimiento"] = pd.cut(
     labels=["Bajo", "Medio", "Alto"]) #Aqui cree la columna rendimiento que clasifica el promedio en Bajo, Medio y Alto
 
 print(df.head())
+
+
+
+#1ER ANALISIS - ¿Cual area tiene el promedio mas alto?
+promedios = df[["math score", "reading score", "writing score"]].mean()
+materia = promedios.idxmax()
+promedio = promedios.max().round(2)
+
+print("La materia con el promedio más alto es:", materia)
+print("Su promedio es:", promedio)
+
+
+#2DO ANALISIS - ¿Los estudiantes que realizaron el curso de preparación tienen mejores resultados?
+print(df.groupby("test preparation course")["average_score"].mean().round(2))
+
+
+#3ER ANALISIS - ¿Existen diferencias según el nivel educativo de los padres?
+print(df.groupby("parental level of education")["average_score"].mean().sort_values(ascending=False).round(2)) 
+
+
+#4TO ANALISIS - ¿Qué porcentaje de estudiantes tiene rendimiento alto?
+porcentaje = df["rendimiento"].value_counts(normalize=True) * 100
+print(porcentaje.round(2))
