@@ -59,3 +59,36 @@ print(df.groupby("parental level of education")["average_score"].mean().sort_val
 #4TO ANALISIS - ¿Qué porcentaje de estudiantes tiene rendimiento alto?
 porcentaje = df["rendimiento"].value_counts(normalize=True) * 100
 print(porcentaje.round(2))
+
+
+
+
+#GRAFICAS
+#1er Grafica - Promedio de cada materia
+promedios = df[["math score", "reading score", "writing score"]].mean()
+
+promedios.plot(kind="bar")
+
+plt.title("Promedio por materia")
+plt.ylabel("Promedio")
+plt.xlabel("Materia")
+plt.xticks(rotation=0)
+plt.show()
+
+#2da Grafica - Rendimiento de los estudiantes
+df["rendimiento"].value_counts().plot(kind="bar")
+
+plt.title("Estudiantes por nivel de rendimiento")
+plt.ylabel("Número de estudiantes")
+plt.xlabel("Rendimiento")
+plt.xticks(rotation=0)
+plt.show()
+
+#3ra Grafica - Rendimiento por curso de preparación
+df.groupby("test preparation course")["average_score"].mean().plot(kind="bar")
+
+plt.title("Promedio según curso de preparación")
+plt.ylabel("Promedio")
+plt.xlabel("Curso de preparación")
+plt.xticks(rotation=0)
+plt.show()
